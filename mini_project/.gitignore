@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.py[cod]
+.streamlit/secrets.toml
+data/raw/
+data/prepared/images/
+data/prepared/manifest.csv
+models/*.joblib
+reports/
