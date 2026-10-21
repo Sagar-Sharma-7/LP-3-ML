@@ -18,11 +18,13 @@ MODEL_PATH = Path("models/pe_screening_model.joblib")
 
 st.markdown("""
 <style>
-    :root { --ink: #edf0f5; --muted: #a4acb9; --paper: #0e1117; --panel: #171b23; --sand: #1d222c; --line: #2b3340; --accent: #a8b8ff; --accent-dark: #c5d0ff; }
+    :root { --ink: #e7e7ea; --muted: #9a9aa1; --paper: #0d0d0f; --panel: #171719; --sand: #202024; --line: #2c2c31; --accent: #b8b8be; --accent-dark: #e4e4e7; }
     .stApp { background: var(--paper); color: var(--ink); }
-    [data-testid="stHeader"] { background: rgba(14, 17, 23, 0.94); border-bottom: 1px solid rgba(43, 51, 64, 0.8); }
-    [data-testid="stToolbar"], [data-testid="stHeaderActionElements"] { display: none; }
-    [data-testid="stSidebar"] { background: #131821; border-right: 1px solid var(--line); }
+    [data-testid="stHeader"] { background: rgba(13, 13, 15, 0.94); border-bottom: 1px solid rgba(44, 44, 49, 0.8); }
+    [data-testid="stToolbar"] { display: flex !important; visibility: visible !important; }
+    [data-testid="stHeaderActionElements"] { display: none; }
+    [data-testid="stSidebarCollapsedControl"] { display: flex !important; visibility: visible !important; color: var(--ink); }
+    [data-testid="stSidebar"] { background: #141416; border-right: 1px solid var(--line); }
     [data-testid="stSidebar"] > div:first-child { padding-top: 1.3rem; }
     .block-container { max-width: 1240px; padding: 2.4rem 3rem 3rem; }
     h1, h2, h3, p, label, span, div { font-family: Geist, Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
@@ -30,18 +32,17 @@ st.markdown("""
     h1 { color: var(--ink); font-size: 2.35rem !important; font-weight: 650 !important; letter-spacing: -0.035em; margin-bottom: 0.25rem !important; }
     h2 { color: var(--ink); font-size: 1.42rem !important; font-weight: 620 !important; padding-top: 1rem; }
     h3 { color: var(--ink); font-weight: 600 !important; }
-    .eyebrow { color: var(--accent); font-family: Geist, Inter, ui-sans-serif, sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; margin-bottom: 0.45rem; }
     .subtitle { color: var(--muted); font-size: 1.04rem; max-width: 700px; margin-bottom: 1.6rem; }
-    .disclaimer { background: #1a202b; border-left: 3px solid var(--accent); color: #cbd3df; padding: 0.85rem 1rem; border-radius: 4px; font-size: 0.92rem; margin: 0.4rem 0 1.8rem; }
+    .disclaimer { background: #1a1a1e; border-left: 3px solid #707077; color: #c7c7cd; padding: 0.85rem 1rem; border-radius: 4px; font-size: 0.92rem; margin: 0.4rem 0 1.8rem; }
     .sidebar-label { color: var(--accent); font-family: Geist, Inter, ui-sans-serif, sans-serif; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; margin: 0.7rem 0 0.35rem; }
     .sidebar-title { color: var(--ink); font-size: 1.22rem; font-weight: 600; margin-bottom: 0.25rem; }
     .sidebar-copy { color: var(--muted); font-size: 0.84rem; line-height: 1.45; margin-bottom: 1.1rem; }
     [data-testid="stMetric"] { background: var(--panel); border: 1px solid var(--line); border-radius: 7px; padding: 1rem 1.1rem; }
     [data-testid="stMetricLabel"] { color: var(--muted); font-family: Geist, Inter, ui-sans-serif, sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
     [data-testid="stMetricValue"] { color: var(--ink); font-family: Geist, Inter, ui-sans-serif, sans-serif; }
-    [data-testid="stFileUploader"] { background: var(--panel); border: 1px dashed #54627b; border-radius: 7px; padding: 0.65rem; }
-    .stButton > button, .stDownloadButton > button { background: var(--accent); color: #182033; border: 0; border-radius: 4px; font-family: Geist, Inter, ui-sans-serif, sans-serif; font-size: 0.84rem; font-weight: 650; padding: 0.55rem 0.9rem; }
-    .stButton > button:hover, .stDownloadButton > button:hover { background: var(--accent-dark); color: #111827; border: 0; }
+    [data-testid="stFileUploader"] { background: var(--panel); border: 1px dashed #53535a; border-radius: 7px; padding: 0.65rem; }
+    .stButton > button, .stDownloadButton > button { background: var(--accent); color: #171719; border: 0; border-radius: 4px; font-family: Geist, Inter, ui-sans-serif, sans-serif; font-size: 0.84rem; font-weight: 650; padding: 0.55rem 0.9rem; }
+    .stButton > button:hover, .stDownloadButton > button:hover { background: var(--accent-dark); color: #0d0d0f; border: 0; }
     [data-baseweb="radio"] label { color: var(--ink); font-family: Geist, Inter, ui-sans-serif, sans-serif; font-size: 0.9rem; }
     [data-testid="stExpander"] { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; }
     hr { border-color: var(--line); }
@@ -109,10 +110,9 @@ def load_uploaded(uploaded) -> tuple[str, object]:
     return uploaded.name, loaded
 
 
-st.markdown("<div class='eyebrow'>ACADEMIC RESEARCH PROJECT</div>", unsafe_allow_html=True)
 st.title("Pulmonary Embolism Screening")
 st.markdown("<div class='subtitle'>A compact CT-slice analysis workspace for reviewing model scores, test results, and supporting visual evidence.</div>", unsafe_allow_html=True)
-st.markdown("<div class='disclaimer'>This academic prototype is not a medical device. It must not be used to diagnose, exclude, or guide treatment for pulmonary embolism.</div>", unsafe_allow_html=True)
+st.markdown("<div class='disclaimer'>This ML project is not a medical device. It must not be used to diagnose, exclude, or guide treatment for pulmonary embolism.</div>", unsafe_allow_html=True)
 
 model = current_model()
 if model is None:
@@ -159,7 +159,7 @@ if page == "Screening workspace":
             csv = report_frame.to_csv(index=False).encode("utf-8")
             download_left, download_right = st.columns(2)
             download_left.download_button("Download prediction CSV", csv, "prediction_results.csv", "text/csv")
-            download_right.download_button("Download academic PDF report", pdf_data, "pe_screening_report.pdf", "application/pdf")
+            download_right.download_button("Download PDF report", pdf_data, "pe_screening_report.pdf", "application/pdf")
     else:
         st.markdown("<div class='disclaimer'>Select prepared FUMPE images from <code>data/prepared/images</code> to begin a real-data demonstration.</div>", unsafe_allow_html=True)
 
@@ -185,5 +185,5 @@ else:
     CT intensities are displayed with a fixed pulmonary-angiography window. Expert masks create slice labels, and all patient slices remain together within either a training or evaluation fold.
 
     ### Appropriate use
-    The system is designed for academic demonstration of medical-image preprocessing and machine learning. It is not a clinical diagnostic workflow.
+    This ML project demonstrates medical-image preprocessing and machine learning. It is not a clinical diagnostic workflow.
     """)

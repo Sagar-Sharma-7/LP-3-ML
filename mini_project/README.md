@@ -2,7 +2,7 @@
 
 A compact final-year ML project that demonstrates a pulmonary embolism (PE) **screening workflow** from individual CT slices. It includes DICOM/PNG loading, CT-image preprocessing, a CPU-friendly classifier, sensitivity-map visual aid, evaluation metrics, and downloadable reports.
 
-> **Safety statement:** This is an academic prototype, not a medical device. It must not be used to diagnose, exclude, or treat pulmonary embolism. Results require qualified clinical review.
+> **Safety statement:** This ML project is not a medical device. It must not be used to diagnose, exclude, or treat pulmonary embolism. Results require qualified clinical review.
 
 ## Why this scope
 
@@ -16,7 +16,7 @@ The project is designed for the available laptop: i7-1360P CPU, integrated graph
 - Slice-level probability scores and selected-image study summary
 - Occlusion-sensitivity visual aid (explicitly not lesion localisation)
 - Evaluation metrics: accuracy, precision, recall, F1, and ROC-AUC
-- CSV and academic PDF report downloads
+- CSV and PDF report downloads
 - Model persistence and an on-device Streamlit user interface
 - A synthetic demo-data generator so the whole project runs immediately
 - A real-data workflow using a storage-capped subset of FUMPE CT scans and expert masks

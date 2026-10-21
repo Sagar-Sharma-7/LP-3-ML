@@ -1,4 +1,4 @@
-"""Shared utilities for the CPU-only PE screening academic prototype.
+"""Shared utilities for the CPU-only PE screening ML project.
 
 This is intentionally a research/teaching utility. It does not diagnose PE.
 """
@@ -180,7 +180,7 @@ def create_report(study_name: str, records: list[dict], model_metrics: dict) -> 
     width, height = A4
     styles = getSampleStyleSheet()
     pdf.setFont("Helvetica-Bold", 15)
-    pdf.drawString(42, height - 48, "PE Screening Prototype – Academic Report")
+    pdf.drawString(42, height - 48, "PE Screening Project Report")
     pdf.setFont("Helvetica", 9)
     y = height - 72
     lines = [
