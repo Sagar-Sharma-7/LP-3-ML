@@ -18,30 +18,31 @@ MODEL_PATH = Path("models/pe_screening_model.joblib")
 
 st.markdown("""
 <style>
-    :root { --ink: #2f2a24; --muted: #766b5d; --paper: #f7f2e9; --panel: #fffdfa; --sand: #e8dccb; --line: #d9c9b5; --accent: #8a5a3b; --accent-dark: #643d27; }
+    :root { --ink: #edf0f5; --muted: #a4acb9; --paper: #0e1117; --panel: #171b23; --sand: #1d222c; --line: #2b3340; --accent: #a8b8ff; --accent-dark: #c5d0ff; }
     .stApp { background: var(--paper); color: var(--ink); }
-    [data-testid="stHeader"] { background: rgba(247, 242, 233, 0.92); border-bottom: 1px solid rgba(217, 201, 181, 0.65); }
+    [data-testid="stHeader"] { background: rgba(14, 17, 23, 0.94); border-bottom: 1px solid rgba(43, 51, 64, 0.8); }
     [data-testid="stToolbar"], [data-testid="stHeaderActionElements"] { display: none; }
-    [data-testid="stSidebar"] { background: #eee3d4; border-right: 1px solid var(--line); }
+    [data-testid="stSidebar"] { background: #131821; border-right: 1px solid var(--line); }
     [data-testid="stSidebar"] > div:first-child { padding-top: 1.3rem; }
     .block-container { max-width: 1240px; padding: 2.4rem 3rem 3rem; }
-    h1, h2, h3, p, label, span, div { font-family: Georgia, "Times New Roman", serif; }
-    h1 { color: var(--ink); font-size: 2.45rem !important; font-weight: 600 !important; letter-spacing: -0.03em; margin-bottom: 0.25rem !important; }
-    h2 { color: var(--ink); font-size: 1.45rem !important; font-weight: 600 !important; padding-top: 1rem; }
+    h1, h2, h3, p, label, span, div { font-family: Geist, Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    code, pre, [data-testid="stCode"] { font-family: "Geist Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace !important; }
+    h1 { color: var(--ink); font-size: 2.35rem !important; font-weight: 650 !important; letter-spacing: -0.035em; margin-bottom: 0.25rem !important; }
+    h2 { color: var(--ink); font-size: 1.42rem !important; font-weight: 620 !important; padding-top: 1rem; }
     h3 { color: var(--ink); font-weight: 600 !important; }
-    .eyebrow { color: var(--accent); font-family: Arial, sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; margin-bottom: 0.45rem; }
+    .eyebrow { color: var(--accent); font-family: Geist, Inter, ui-sans-serif, sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; margin-bottom: 0.45rem; }
     .subtitle { color: var(--muted); font-size: 1.04rem; max-width: 700px; margin-bottom: 1.6rem; }
-    .disclaimer { background: #f1e6d5; border-left: 3px solid var(--accent); color: #5e4938; padding: 0.85rem 1rem; border-radius: 3px; font-size: 0.92rem; margin: 0.4rem 0 1.8rem; }
-    .sidebar-label { color: var(--accent); font-family: Arial, sans-serif; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; margin: 0.7rem 0 0.35rem; }
+    .disclaimer { background: #1a202b; border-left: 3px solid var(--accent); color: #cbd3df; padding: 0.85rem 1rem; border-radius: 4px; font-size: 0.92rem; margin: 0.4rem 0 1.8rem; }
+    .sidebar-label { color: var(--accent); font-family: Geist, Inter, ui-sans-serif, sans-serif; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; margin: 0.7rem 0 0.35rem; }
     .sidebar-title { color: var(--ink); font-size: 1.22rem; font-weight: 600; margin-bottom: 0.25rem; }
     .sidebar-copy { color: var(--muted); font-size: 0.84rem; line-height: 1.45; margin-bottom: 1.1rem; }
     [data-testid="stMetric"] { background: var(--panel); border: 1px solid var(--line); border-radius: 7px; padding: 1rem 1.1rem; }
-    [data-testid="stMetricLabel"] { color: var(--muted); font-family: Arial, sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
-    [data-testid="stMetricValue"] { color: var(--ink); font-family: Georgia, "Times New Roman", serif; }
-    [data-testid="stFileUploader"] { background: var(--panel); border: 1px dashed #b89c80; border-radius: 7px; padding: 0.65rem; }
-    .stButton > button, .stDownloadButton > button { background: var(--accent); color: #fffaf4; border: 0; border-radius: 4px; font-family: Arial, sans-serif; font-size: 0.84rem; font-weight: 600; padding: 0.55rem 0.9rem; }
-    .stButton > button:hover, .stDownloadButton > button:hover { background: var(--accent-dark); color: white; border: 0; }
-    [data-baseweb="radio"] label { color: var(--ink); font-family: Arial, sans-serif; font-size: 0.9rem; }
+    [data-testid="stMetricLabel"] { color: var(--muted); font-family: Geist, Inter, ui-sans-serif, sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+    [data-testid="stMetricValue"] { color: var(--ink); font-family: Geist, Inter, ui-sans-serif, sans-serif; }
+    [data-testid="stFileUploader"] { background: var(--panel); border: 1px dashed #54627b; border-radius: 7px; padding: 0.65rem; }
+    .stButton > button, .stDownloadButton > button { background: var(--accent); color: #182033; border: 0; border-radius: 4px; font-family: Geist, Inter, ui-sans-serif, sans-serif; font-size: 0.84rem; font-weight: 650; padding: 0.55rem 0.9rem; }
+    .stButton > button:hover, .stDownloadButton > button:hover { background: var(--accent-dark); color: #111827; border: 0; }
+    [data-baseweb="radio"] label { color: var(--ink); font-family: Geist, Inter, ui-sans-serif, sans-serif; font-size: 0.9rem; }
     [data-testid="stExpander"] { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; }
     hr { border-color: var(--line); }
     #MainMenu, footer { visibility: hidden; }
